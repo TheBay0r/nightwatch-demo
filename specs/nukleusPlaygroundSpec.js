@@ -1,47 +1,45 @@
 (function nukleusPlaygroundSpec() {
+  let playgroundPage;
 
   function before(browser) {
-    browser.url(`${browser.launchUrl}/playground`);
+    playgroundPage = browser.page.playgroundPage();
+    playgroundPage.navigate();
   }
 
   function after(browser) {
     browser.end();
   }
 
-  function closeToast(browser) {
-    browser.expect.element('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false').to.be.visible.before(500);
-    browser.expect.element('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false').to.have.css('opacity').which.equals(1).before(1000); // Once animation is done, opacity is 1
-    browser.expect.element('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false > p > button').to.be.visible.before(500);
+  function closeToast() {
+    playgroundPage.expect.section('@toastNotification').to.be.visible.before(500);
+    playgroundPage.expect.section('@toastNotification').to.have.css('opacity').which.equals(1).before(1000); // Once animation is done, opacity is 1
 
-    browser.click('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false > p > button');
+    const toastNotification = playgroundPage.section.toastNotification;
+    toastNotification.expect.element('@message').to.be.visible;
+    toastNotification.expect.element('@message').to.contain.text('Hello, I am a notification box');
+    toastNotification.expect.element('@closeButton').to.be.visible;
 
-    browser.expect.element('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false > p > button').to.not.be.present.before(5000);
+    playgroundPage.closeNotification();
   }
 
-  function openModalDialog(browser) {
+  function openModalDialog() {
     // Assert Button to open Modal Window is visible
-    browser.expect.element('#nukleus-playground > div > div.panel > div > div:nth-child(66) > div > div > button').to.be.visible.before(500);
+    playgroundPage.expect.element('@openModalDialogButton').to.be.visible;
 
     // Assert Modal Window doesn't exist
-    browser.expect.element('#react-aria-modal-dialog').to.not.be.present;
+    playgroundPage.expect.section('@modalDialog').to.not.be.present;
 
-    // Click Modal Window
-    browser.click('#nukleus-playground > div > div.panel > div > div:nth-child(66) > div > div > button');
-    // Assert Modal Window is visible
-    browser.expect.element('#react-aria-modal-dialog').to.be.visible.before(500);
+    // Click Modal Window and assert Modal Window is visible
+    playgroundPage.openModalDialog();
   }
 
-  function closeModalDialog(browser) {
-    browser.expect.element('#react-aria-modal-dialog > section > footer > button.index---button---2FlMD.index---primary---1Uw9F').to.be.visible.before(500);
-    browser.expect.element('#react-aria-modal-dialog > section > footer > button.index---button---2FlMD.index---secondary---1CL4a').to.be.visible.before(500);
+  function closeModalDialog() {
+    const modalDialog = playgroundPage.section.modalDialog;
+    modalDialog.expect.element('@okButton').to.be.visible;
+    modalDialog.expect.element('@cancelButton').to.be.visible;
+    modalDialog.expect.element('@closeButton').to.be.visible;
 
-    browser.expect.element('#nukleus-modal-close').to.be.visible.before(500);
-    browser.expect.element('#nukleus-modal-close').to.have.attribute('type').which.equals('button');
-    browser.click('#nukleus-modal-close')
-
-    browser.expect.element('#react-aria-modal-dialog > section > footer > button.index---button---2FlMD.index---primary---1Uw9F').to.not.be.present.before(5000);
-    browser.expect.element('#react-aria-modal-dialog > section > footer > button.index---button---2FlMD.index---secondary---1CL4a').to.not.be.present;
-    browser.expect.element('#nukleus-modal-close').to.not.be.present;
+    playgroundPage.closeModalDialog();
   }
   module.exports = {
     before,
