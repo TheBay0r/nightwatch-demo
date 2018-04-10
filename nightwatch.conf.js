@@ -18,6 +18,11 @@ module.exports = {
     }
   },
 
+  test_workers: {
+    enabled: true,
+    workers: 20
+  },
+
   test_settings: {
     default: {
       launch_url: 'http://localhost:3000',
