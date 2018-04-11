@@ -1,0 +1,24 @@
+Get video recorder: docker pull selenoid/video-recorder
+
+Configure Selenoid Hub:
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock  \
+    -v ${HOME}/selenoid:/root                                            \
+    -e OVERRIDE_HOME=${HOME}/selenoid                                    \
+    aerokube/cm:latest-release selenoid configure --vnc --browsers chrome,firefox --last-versions 1
+
+Start Selenoid Hub:
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock  \
+    -v ${HOME}/selenoid:/root                                            \
+    -e OVERRIDE_HOME=${HOME}/selenoid                                    \
+    aerokube/cm:latest-release selenoid start --vnc
+
+Configure Selenoid UI:
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock  \
+    -v ${HOME}/selenoid:/root                                            \
+    -e OVERRIDE_HOME=${HOME}/selenoid                                    \
+    aerokube/cm:latest-release selenoid-ui start
+
+
+
+Start Nukleus Docker / DELETE node_modules first
+docker run -d -v (pwd):/nukleus -w="/nukleus" node bash -c "npm install; npm start"
