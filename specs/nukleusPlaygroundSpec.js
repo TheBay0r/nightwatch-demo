@@ -9,11 +9,8 @@
   }
 
   function closeToast(browser) {
-    // Use pause to explicitly wait for the notification animation to be done
-    // TODO: Get rid of explicit pause. That's a horrible practice!
-    browser.pause(1100);
-
     browser.expect.element('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false').to.be.visible.before(500);
+    browser.expect.element('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false').to.have.css('opacity').which.equals(1).before(1000); // Once animation is done, opacity is 1
     browser.expect.element('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false > p > button').to.be.visible.before(500);
 
     browser.click('#nukleus-playground > div > div.index---container---3DTJD.index---visible---2hzq7.false > p > button');
