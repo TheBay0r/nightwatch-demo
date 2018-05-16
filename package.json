@@ -1,0 +1,27 @@
+{
+  "name": "nightwatch-demo",
+  "version": "1.0.0",
+  "description": "Small setup of nightwatch to demonstrate how to easily start with end-to-end automation testing in JavaScript",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheBay0r/nightwatch-demo.git"
+  },
+  "scripts": {
+    "start": "nightwatch"
+  },
+  "keywords": [
+    "nightwatch",
+    "demo",
+    "presentation",
+    "demonstration"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheBay0r/nightwatch-demo/issues"
+  },
+  "homepage": "https://github.com/TheBay0r/nightwatch-demo#readme",
+  "dependencies": {
+    "nightwatch": "0.9.20"
+  }
+}
