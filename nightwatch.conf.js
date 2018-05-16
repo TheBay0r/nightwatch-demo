@@ -7,9 +7,10 @@ module.exports = {
   globals_path: '',
 
   selenium: {
-    start_process: true,
-    server_path: 'bin/selenium-server-standalone-3.11.0.jar',
+    start_process: false,
+    server_path: '',
     log_path: 'reports/',
+    host: '192.168.99.100',
     port: 4444,
     cli_args: {
       'webdriver.chrome.driver' : 'node_modules/.bin/chromedriver',
@@ -25,9 +26,9 @@ module.exports = {
 
   test_settings: {
     default: {
-      launch_url: 'http://localhost:3000',
+      launch_url: 'http://172.17.0.1:3000',
       selenium_port: 4444,
-      selenium_host: 'localhost',
+      selenium_host: '192.168.99.100',
       silent: true,
       screenshots: {
         enabled: true,
@@ -36,6 +37,7 @@ module.exports = {
       },
       desiredCapabilities: {
         browserName: 'chrome',
+        version: '65.0'
         // setHeadless: true,
       }
     },
