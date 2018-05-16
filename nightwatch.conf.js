@@ -13,7 +13,7 @@ module.exports = {
     port: 4444,
     cli_args: {
       'webdriver.chrome.driver' : 'node_modules/.bin/chromedriver',
-      'webdriver.gecko.driver' : '',
+      'webdriver.gecko.driver' : 'node_modules/.bin/geckodriver',
       'webdriver.edge.driver' : ''
     }
   },
